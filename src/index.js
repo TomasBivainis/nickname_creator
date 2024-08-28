@@ -38,6 +38,10 @@ document.querySelector("#add_word").addEventListener("click", () => {
   document.querySelector("#words").appendChild(container);
 });
 
+document
+  .querySelector("#capitalization")
+  .addEventListener("change", updateNickname);
+
 function updateNickname() {
   let wordsList = document.querySelectorAll(".inputs");
   let nickname = "";
@@ -75,13 +79,7 @@ function updateNickname() {
       break;
     case "no_upper":
       words.forEach((word) => {
-        let temp = "";
-
-        for (let i = 0; i < word.length; i++) {
-          temp += word.charAt(i).toLowerCase();
-        }
-
-        nickname += word;
+        nickname += word.toLowerCase();
       });
       break;
     default:
