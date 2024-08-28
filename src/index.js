@@ -41,14 +41,57 @@ document.querySelector("#add_word").addEventListener("click", () => {
 function updateNickname() {
   let wordsList = document.querySelectorAll(".inputs");
   let nickname = "";
+  const capitalizationType = document.querySelector("#capitalization").value;
+  let words = [];
 
   wordsList.forEach((inputs) => {
-    console.log(inputs);
     let word = inputs.querySelector(".word").value;
     let len = inputs.querySelector(".slider").value;
 
-    nickname += word.substring(0, len);
+    words.push(word.substring(0, len));
   });
+
+  switch (capitalizationType) {
+    case "only_first":
+      words.forEach((word) => {
+        nickname += word.toLowerCase();
+      });
+
+      nickname = nickname.charAt(0).toUpperCase() + nickname.slice(1);
+
+      break;
+    case "all_firsts":
+      words.forEach((word) => {
+        let temp = "";
+
+        temp += word.charAt(0).toUpperCase();
+
+        for (let i = 1; i < word.length; i++) {
+          temp += word.charAt(i).toLowerCase();
+        }
+
+        nickname += temp;
+      });
+      break;
+    case "no_upper":
+      words.forEach((word) => {
+        let temp = "";
+
+        for (let i = 0; i < word.length; i++) {
+          temp += word.charAt(i).toLowerCase();
+        }
+
+        nickname += word;
+      });
+      break;
+    default:
+      words.forEach((word) => {
+        nickname += word;
+      });
+      break;
+  }
+
+  if (nickname === "") nickname = "Waiting for words...";
 
   document.querySelector("#nickname").innerHTML = nickname;
 }
