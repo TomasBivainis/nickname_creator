@@ -81,9 +81,17 @@ function createWord() {
   let divRangeValue = document.createElement("div");
   divRangeValue.innerHTML = "0";
 
+  let buttonDelete = document.createElement("button");
+  buttonDelete.classList.add("delete");
+  buttonDelete.innerHTML = "Delete";
+  buttonDelete.addEventListener("click", (e) => {
+    e.target.parentElement.remove();
+  });
+
   container.appendChild(inputWord);
   container.appendChild(inputSlidingWordLength);
   container.appendChild(divRangeValue);
+  container.appendChild(buttonDelete);
 
   document.querySelector("#words").appendChild(container);
 }
